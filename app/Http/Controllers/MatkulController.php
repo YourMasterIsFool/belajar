@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Matkul;
+use App\Dosen;
 
 class MatkulController extends Controller
 {
     public function index(Request $request){
-
-    	$data = DB::select('select matkul.id_matkul, matkul.mata_kuliah, dosen.nama_dosen from matkul inner join dosen where dosen.id_dosen=matkul.dosen_id');
-
+    	
+    	$data = Dosen::with('matkul')->get();
+    	
     	return view('matkul.matkul-home',['data'=>$data]);
     }
 

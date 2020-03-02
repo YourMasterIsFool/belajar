@@ -20,18 +20,19 @@ Mata Kuliah
 		
 		<tbody>
 			@foreach($data as $index => $d)
-
-				<tr>
+				
+				@foreach($d->matkul as $matkul)
+					<tr>
 					<td>{{ $index+1 }}</td>
-					<td>{{ $d->mata_kuliah }}</td>
+					<td>{{ $matkul->mata_kuliah }}</td>
 					<td>{{ $d->nama_dosen }}</td>
 					<td>
 						<div class="row">
 							<div class='col-4'>
-								<input type="button" onclick="location.href='{{ route('matkul.edit', $d->id_matkul ) }}'" name="edit" value="update" class="btn btn-warning">
+								<input type="button" onclick="location.href='{{ route('matkul.edit', $matkul->id_matkul ) }}'" name="edit" value="update" class="btn btn-warning">
 							</div>
 							<div class="col-4">
-								<form method='post' action="{{ route('matkul.hapus', $d->id_matkul)}}" >
+								<form method='post' action="{{ route('matkul.hapus', $matkul->id_matkul)}}" >
 									@csrf
 									<input type="submit" name="delete" value="hapus"  class="btn btn-danger">
 								</form>
@@ -40,10 +41,15 @@ Mata Kuliah
 
 					</td>
 				</tr>
-
+				@endforeach
 			@endforeach
 
 		</tbody>
 	</table>
 
 @endsection
+
+<!--
+
+
+			!-->
